@@ -107,6 +107,68 @@
             <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
@@ -124,13 +186,20 @@
                         </span>
                     
                     
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/helloWord/">helloWord</a>
+                            
+                        </span>
+                    
                 </div>
             
         </header>
 
         <div class="post-content">
-            <p><img src="http://jicaise.test.upcdn.net/2020/03/02/WX20200130-213046.png" alt="WX20200130-213046"></p>
-
+            <h2 id="哈哈"><a href="#哈哈" class="headerlink" title="哈哈"></a>哈哈</h2><h1 id="haha"><a href="#haha" class="headerlink" title="haha"></a>haha</h1><p>好<br><img src="http://jicaise.test.upcdn.net/2020/03/02/WX20200130-213046.png" alt="WX20200130-213046"></p>
+<h1 id="A级"><a href="#A级" class="headerlink" title="A级"></a>A级</h1><h2 id="2级"><a href="#2级" class="headerlink" title="2级"></a>2级</h2><h3 id="编辑"><a href="#编辑" class="headerlink" title="#编辑"></a>#编辑</h3><h1 id="222"><a href="#222" class="headerlink" title="222"></a>222</h1><h2 id="12"><a href="#12" class="headerlink" title="##12"></a>##12</h2>
         </div>
 
         
@@ -148,6 +217,8 @@
             </div>
         </section>
         <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/03/03/%E7%BE%8E%E6%9C%AF%E5%86%B3%E6%88%98%E4%B9%8B%E6%97%97%E9%BC%93%E7%9B%B8%E5%BD%93%F0%9F%98%82/">美术战争之旗鼓相当😂</a>
             
             
             <a class="next" rel="next" href="/2020/03/02/hello-world/">Hello World</a>
