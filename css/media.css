@@ -1,7 +1,7 @@
 /* mobile phone and smart portable devices */
 @media screen and (max-width: 479px) {
   .main {
-    padding-top: 40pt;
+    padding-top: 30pt;
   }
   .navbar {
     display: none;
@@ -112,7 +112,7 @@
     display: none !important;
   }
   .footer {
-    height: 3rem;
+    height: 2rem;
     width: 100%;
     text-align: center;
     line-height: 1.5rem;
