@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="初心者">
+
+
+
+
+
+<title>资料分析秒杀公式 | 极彩色</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">极彩色</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">极彩色</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">资料分析秒杀公式</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">初心者</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 12, 2020&nbsp;&nbsp;22:51:07</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%85%AC%E5%8A%A1%E5%91%98%E8%80%83%E8%AF%95/">公务员考试</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文整理于B站<a href="https://www.bilibili.com/video/BV1Sb411n7Qj?from=search&seid=10624013247807023171" target="_blank" rel="noopener">《行测喜哥》</a></p>
+<h1 id="比重升降"><a href="#比重升降" class="headerlink" title="比重升降"></a>比重升降</h1><h2 id="提问方式"><a href="#提问方式" class="headerlink" title="提问方式"></a>提问方式</h2><ul>
+<li>2016年1-4月，第一、二、三产业中，用电量<strong>占</strong>全社会用电量<strong>比重</strong>高于<strong>上年</strong>同期水平的产业有几个？（ ）</li>
+<li>2013年3月末，轻工业中长期贷款余额<strong>占</strong>工业中长期贷款余额总体的<strong>比重与上年相比</strong>（上升/下降）。</li>
+<li>2015年3月末，中央企业所有者权益<strong>占</strong>国有企业总体<strong>比重比上年</strong>同期约（上升、下降）。</li>
+</ul>
+<h2 id="核心公式"><a href="#核心公式" class="headerlink" title="核心公式"></a>核心公式</h2><p>A代表今年<strong>部分值</strong>的总量<br>a代表今年<strong>部分值</strong>比去年的增长率<br>B代表今年<strong>总体值</strong>的总量<br>b代表今年<strong>总体值</strong>比去年的增长率</p>
+<p>$$ 现期比重-基期比重={\frac A B}-{\frac A {1+a}}  \div {\frac B {1+b<br>}} $$<br>$$= {\frac A B}-{\frac A {1+a}} \times {\frac {1+b} B}$$<br>$$= {\frac A B}-{\frac A B}\times {\frac {1+b}{1+a}}$$<br>$$= \frac A B \times {\frac {a-b}{1+a}}$$</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><ul>
+<li>通常当部分增速<strong>高于</strong>整体增速时，部分占整体的比重<strong>上升</strong></li>
+<li>通常当部分增速<strong>低于</strong>整体增速时，部分占整体的比重<strong>下降</strong></li>
+<li>通常当部分增速<strong>等于</strong>整体增速时，部分占整体的比重<strong>不变</strong></li>
+</ul>
+<h1 id="比重增量"><a href="#比重增量" class="headerlink" title="比重增量"></a>比重增量</h1><h2 id="提问方式-1"><a href="#提问方式-1" class="headerlink" title="提问方式"></a>提问方式</h2><ul>
+<li>2015年度，该省园区企业上缴税金<strong>占</strong>主营业务收入的<strong>比重比上年</strong>同期（ ）</li>
+<li>2013年3月末，轻工业中长期贷款余额<strong>占</strong>工业中长期贷款余额总体的<strong>比重与上年相比</strong>（ ）</li>
+<li>2015年3月末，中央企业所有者权益<strong>占</strong>国有企业总体<strong>比重比上年</strong>同期约（ ）</li>
+</ul>
+<h2 id="核心公式-1"><a href="#核心公式-1" class="headerlink" title="核心公式"></a>核心公式</h2><p>A代表今年<strong>部分值</strong>的总量<br>a代表今年<strong>部分值</strong>比去年的增长率<br>B代表今年<strong>总体值</strong>的总量<br>b代表今年<strong>总体值</strong>比去年的增长率</p>
+<p>$$ 现期比重-基期比重={\frac A B}-{\frac A {1+a}}  \div {\frac B {1+b<br>}} $$<br>$$= {\frac A B}-{\frac A {1+a}} \times {\frac {1+b} B}$$<br>$$= {\frac A B}-{\frac A B}\times {\frac {1+b}{1+a}}$$<br>$$= \frac A B \times {\frac {a-b}{1+a}}$$</p>
+<h3 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h3><ul>
+<li>该公式推导方式与<a href="#比重升降">比重升降</a>核心公式相同</li>
+<li>通常比重变化量$\leq$增长率变化率</li>
+<li>正确答案通常是较小数字</li>
+<li>单位优先选带“百分点”的选项</li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%85%AC%E5%8A%A1%E5%91%98%E8%80%83%E8%AF%95/"># 公务员考试</a>
+                    
+                        <a href="/tags/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90%E5%85%AC%E5%BC%8F/"># 资料分析公式</a>
+                    
+                        <a href="/tags/%E8%A1%8C%E6%B5%8B%E7%A7%92%E6%9D%80%E5%85%AC%E5%BC%8F/"># 行测秒杀公式</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2020/04/24/%E9%BA%BB%E8%BE%A3%E9%B8%A1%E4%B8%9D/">麻辣鸡丝</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>©2020 极彩色 | Power by Hxeo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
