@@ -12,7 +12,7 @@
 
 
 
-<title>资料分析——基期量、默契量、增长量、增长率之间的转换 | 极彩色</title>
+<title>资料分析——基期量、现期量量、增长量、增长率公式 | 极彩色</title>
 
 
 
@@ -146,11 +146,73 @@
             <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">资料分析——基期量、默契量、增长量、增长率之间的转换</h1>
+            <h1 class="post-title">资料分析——基期量、现期量量、增长量、增长率公式</h1>
             
                 <div class="post-meta">
                     
@@ -175,8 +237,8 @@
         </header>
 
         <div class="post-content">
-            <p>#公式转换<br>已知基期量、增长量，求现期量：<br>$$末期量=基期量+增长量$$<br>已知基期量、增长率，求现期量：<br>$$末期量=基期量\times(1+增长率)$$<br>已知增长量、增长率，求现期量：<br>$$现期量=\frac{增长量}{增长率}+增长量$$<br>已知基期量、增长量，求增长率：<br>$$增长率=\frac {增长量}{基期量}$$<br>已知基期量、现期量，求增长率：<br>$$增长率=\frac{末期量-基期量}{基期量}$$<br>已知现期量、增长量，求增长率:<br>$$增长率=\frac{增长率}{现期量-增长量}$$<br>已知基期量、增长率，求增长量：<br>$$增长量=基期量\times增长率$$<br>已知现期量、基期量，求增长量：<br>$$增长量=现期量-基期量$$<br>已知现期量、增长率，求增长量：<br>$$增长量=\frac{现期量}{1+增长率}\times增长率$$</p>
-<p>#常用名词<br>*【基期】：是一个时间的概念。指的是基础期、起始期，即起始时间。</p>
+            <h1 id="公式转换"><a href="#公式转换" class="headerlink" title="公式转换"></a>公式转换</h1><p>已知基期量、增长量，求现期量：<br>$$末期量=基期量+增长量$$<br>已知基期量、增长率，求现期量：<br>$$末期量=基期量\times(1+增长率)$$<br>已知增长量、增长率，求现期量：<br>$$现期量=\frac{增长量}{增长率}+增长量$$<br>已知基期量、增长量，求增长率：<br>$$增长率=\frac {增长量}{基期量}$$<br>已知基期量、现期量，求增长率：<br>$$增长率=\frac{末期量-基期量}{基期量}$$<br>已知现期量、增长量，求增长率:<br>$$增长率=\frac{增长率}{现期量-增长量}$$<br>已知基期量、增长率，求增长量：<br>$$增长量=基期量\times增长率$$<br>已知现期量、基期量，求增长量：<br>$$增长量=现期量-基期量$$<br>已知现期量、增长率，求增长量：<br>$$增长量=\frac{现期量}{1+增长率}\times增长率$$</p>
+<h1 id="常用名词"><a href="#常用名词" class="headerlink" title="常用名词"></a>常用名词</h1><p>*【基期】：是一个时间的概念。指的是基础期、起始期，即起始时间。</p>
 <p>*【基期量】：指的是起始时间的数量。在统计学上，基期量即是一个基数。基期量一般作为参照基数，其它时间段的数据都参照这个基数，计算增长率等。</p>
 <p>*【现期】：相对于基期而言，指的是其它时间段。</p>
 <p>*【现期量】：即其它时间段的数量。与基期进行比较的时期的数值。</p>
@@ -211,7 +273,7 @@
         <section class="post-nav">
             
             
-            <a class="next" rel="next" href="/2020/07/01/%E5%9B%9B%E5%8D%81%E5%85%AB%E6%89%8B/">四十八手</a>
+            <a class="next" rel="next" href="/2020/05/12/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90%E7%A7%92%E6%9D%80%E5%85%AC%E5%BC%8F/">资料分析秒杀公式</a>
             
         </section>
 
